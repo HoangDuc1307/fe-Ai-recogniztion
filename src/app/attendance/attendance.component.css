@@ -1,0 +1,77 @@
+.attendance-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 40px;
+  margin-top: 40px;
+  flex-wrap: wrap;
+}
+
+.camera-box {
+  text-align: center;
+}
+
+video {
+  width: 480px;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  transform: scaleX(-1); /* <-- không lật gương, tay trái là tay trái */
+  background-color: #000;
+}
+
+.message {
+  margin-top: 12px;
+  font-weight: bold;
+  font-size: 18px;
+  transition: color 0.3s ease;
+}
+
+.message.success {
+  color: #28a745;
+}
+
+.message.error {
+  color: #dc3545;
+}
+
+.info-box {
+  width: 300px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+}
+
+.info-box h3 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 8px 4px;
+}
+
+th {
+  width: 40%;
+  color: #555;
+}
+
+td {
+  font-weight: 600;
+  color: #222;
+}
+
+/* chữ mờ khi chưa có dữ liệu */
+td:empty::after {
+  content: '—';
+  color: #aaa;
+}

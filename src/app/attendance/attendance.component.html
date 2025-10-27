@@ -1,0 +1,37 @@
+<div class="attendance-container">
+  <!-- Camera bên trái -->
+  <div class="camera-box">
+    <video autoplay></video>
+    <canvas width="640" height="480" hidden></canvas>
+
+    <!-- Thông báo -->
+    <p
+      class="message"
+      [ngClass]="{
+        success: message.includes('thành công'),
+        error: message.includes('Không') || message.includes('Lỗi')
+      }"
+    >
+      {{ message }}
+    </p>
+  </div>
+
+  <!-- Bảng thông tin bên phải (luôn hiển thị) -->
+  <div class="info-box">
+    <h3>Thông tin điểm danh</h3>
+    <table>
+      <tr>
+        <th>Mã sinh viên</th>
+        <td>{{ studentId || '—' }}</td>
+      <tr>
+        <th>Họ tên</th>
+        <td>{{ fullName || '—' }}</td>
+      </tr>
+      <tr>
+      <tr>
+        <th>Thời gian</th>
+        <td>{{ time || '—' }}</td>
+      </tr>
+    </table>
+  </div>
+</div>

@@ -1,10 +1,9 @@
 <div class="attendance-container">
-  <!-- Camera bên trái -->
   <div class="camera-box">
-    <video autoplay></video>
-    <canvas width="640" height="480" hidden></canvas>
-
-    <!-- Thông báo -->
+    <div class="video-wrapper">
+      <video autoplay playsinline></video>
+      <canvas id="faceCanvas"></canvas>
+    </div>
     <p
       class="message"
       [ngClass]="{
@@ -16,22 +15,28 @@
     </p>
   </div>
 
-  <!-- Bảng thông tin bên phải (luôn hiển thị) -->
   <div class="info-box">
     <h3>Thông tin điểm danh</h3>
     <table>
       <tr>
         <th>Mã sinh viên</th>
         <td>{{ studentId || '—' }}</td>
+      </tr>
       <tr>
         <th>Họ tên</th>
         <td>{{ fullName || '—' }}</td>
       </tr>
       <tr>
-      <tr>
         <th>Thời gian</th>
         <td>{{ time || '—' }}</td>
       </tr>
     </table>
+    <div *ngIf="framedImage" class ="result-box">
+      <h4>Hình ảnh điểm danh</h4>
+      <img [src]="framedImage" alt="Framed Attendance Image" 
+      width="250" 
+      height ="150" 
+      />
+    </div>
   </div>
 </div>

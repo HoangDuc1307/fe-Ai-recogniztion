@@ -11,20 +11,32 @@
   text-align: center;
 }
 
+.video-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
 video {
   width: 480px;
-  height: auto;
+  height: 360px;
   border-radius: 12px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-  transform: scaleX(-1); /* <-- không lật gương, tay trái là tay trái */
   background-color: #000;
+  object-fit: cover;
+}
+
+canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 480px;
+  height: 360px;
+  pointer-events: none;
 }
 
 .message {
   margin-top: 12px;
   font-weight: bold;
   font-size: 18px;
-  transition: color 0.3s ease;
 }
 
 .message.success {
@@ -45,33 +57,22 @@ video {
 
 .info-box h3 {
   text-align: center;
-  color: #333;
   margin-bottom: 15px;
+  color: #333;
+}
+.result-box {
+  margin-top: 10px;
+  text-align: center;
 }
 
-table {
-  width: 100%;
-  border-collapse: collapse;
+.result-box h4 {
+  margin-bottom: 6px;
+  font-size: 14px;
+  color: #333;
 }
 
-th,
-td {
-  text-align: left;
-  padding: 8px 4px;
-}
-
-th {
-  width: 40%;
-  color: #555;
-}
-
-td {
-  font-weight: 600;
-  color: #222;
-}
-
-/* chữ mờ khi chưa có dữ liệu */
-td:empty::after {
-  content: '—';
-  color: #aaa;
+.result-box img {
+  border: 2px solid #4caf50;
+  border-radius: 6px;
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
 }

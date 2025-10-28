@@ -3,8 +3,8 @@
   justify-content: center;
   align-items: flex-start;
   gap: 40px;
-  margin-top: 40px;
   flex-wrap: wrap;
+  margin-top: 40px;
 }
 
 .camera-box {
@@ -13,11 +13,10 @@
 
 video {
   width: 480px;
-  height: auto;
   border-radius: 12px;
+  background: #000;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-  transform: scaleX(-1); /* <-- không lật gương, tay trái là tay trái */
-  background-color: #000;
+  transform: scaleX(-1);
 }
 
 .message {
@@ -70,8 +69,13 @@ td {
   color: #222;
 }
 
-/* chữ mờ khi chưa có dữ liệu */
-td:empty::after {
-  content: '—';
-  color: #aaa;
+.result-box {
+  margin-top: 10px;
+}
+
+.result-box img {
+  border: 2px solid #4caf50;
+  border-radius: 6px;
+  box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+  transform: scaleX(-1);
 }

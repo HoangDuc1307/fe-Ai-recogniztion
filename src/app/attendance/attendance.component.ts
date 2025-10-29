@@ -21,7 +21,7 @@ export class AttendanceComponent implements OnInit, OnDestroy {
   lastDetected = 0;
   framedImage : string | null=null;
   framedImageTimeout: any = null;
-
+  
 
   ngOnInit() {
     this.startCamera();

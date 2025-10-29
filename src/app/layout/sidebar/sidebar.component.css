@@ -1,0 +1,88 @@
+/* Toàn bộ trang */
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  background: #f9f9f9;
+  color: #333;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 350px;
+  background-color: #810f6e;
+  color: white;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  box-sizing: border-box;
+  position: fixed;
+  left: 0;
+  top: 0;
+}
+
+/* Header */
+.sidebar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.sidebar-header h2 {
+  font-size: 38px;
+  font-weight: 600;
+  margin: 0;
+  font-size: 1.65rem;
+  line-height: 1;
+  letter-spacing: 0.5px;
+}
+
+.menu-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+/* Menu */
+.sidebar-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.sidebar-menu a {
+   display: block;
+  padding: 10px 8px;
+  color: #f6f0f0;
+  text-decoration: none;
+  font-size: 1.05rem; /* increase menu font */
+  transition: color 0.15s ease, background-color 0.15s ease;
+
+}
+
+.sidebar-menu a:hover,
+.sidebar-menu a.active {
+background-color: rgba(230, 209, 209, 0.2);
+width:300px;
+padding-left:15px;
+font-size: 1.1rem;
+font-weight: 600;
+}
+
+/* Subscribe */
+.sidebar-subscribe {
+  margin-top: auto;
+  margin-bottom: 25px;
+}
+
+
+
+
+
+
+
+

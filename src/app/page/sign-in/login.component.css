@@ -1,0 +1,150 @@
+/* Nền gradient toàn trang */
+.login-page {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Khung chính */
+.login-wrapper {
+  display: flex;
+  background: #fff;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  width: 800px;
+  max-width: 90%;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Cột trái (hình minh họa) */
+.login-image {
+  background: #f9fafc;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+.login-image img {
+  width: 70%;
+  max-width: 250px;
+}
+
+/* Cột phải (form) */
+.login-form {
+  width: 50%;
+  padding: 60px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.login-form h2 {
+  margin-bottom: 30px;
+  font-size: 28px;
+  color: #333;
+  font-weight: 600;
+  text-align: left;
+}
+
+/* Ô nhập liệu */
+.input-group {
+  margin-bottom: 20px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px 15px;
+  border: none;
+  background: #f3f3f3;
+  border-radius: 25px;
+  font-size: 15px;
+  outline: none;
+  transition: 0.3s;
+}
+
+.input-group input:focus {
+  background: #ebebeb;
+}
+
+/* Nút login */
+.login-btn {
+  width: 100%;
+  background: #4caf50;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+  transition: background 0.3s ease;
+}
+
+.login-btn:hover {
+  background: #43a047;
+}
+
+/* Liên kết phụ */
+.extra-links {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.extra-links a {
+  color: #777;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.extra-links a:hover {
+  text-decoration: underline;
+}
+
+/* Đăng ký */
+.signup {
+  margin-top: 25px;
+  text-align: center;
+  font-size: 14px;
+  color: #444;
+  cursor: pointer;
+}
+
+.signup:hover {
+  color: #4caf50;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .login-wrapper {
+    flex-direction: column;
+  }
+
+  .login-image {
+    width: 100%;
+    padding: 30px;
+  }
+
+  .login-form {
+    width: 100%;
+    padding: 40px 30px;
+  }
+}

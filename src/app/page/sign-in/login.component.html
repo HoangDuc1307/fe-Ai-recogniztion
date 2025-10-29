@@ -1,0 +1,51 @@
+<main id="content" class="wrapper layout-page">
+  <section class="pb-lg-20 pb-16" data-animated-id="1">
+    <div class="bg-body-secondary py-5">
+    </div>
+    <div class="container">
+      <div class=" text-center pt-13 mb-12 mb-lg-15">
+        <div class="text-center"><h2 class="fs-36px mb-11 mb-lg-14">Tài khoản Admin</h2></div>
+      </div>
+      <div class="row no-gutters">
+        <div class="col-lg-10 mx-auto">
+          <div class="row no-gutters">
+            <div class="col-lg-6 mb-15 mb-lg-0 pe-xl-2">
+              <h3 class="fs-4 mb-10">Đăng nhập</h3>
+              
+              <form (ngSubmit)="onSubmit()">
+                <div class="form-group mb-6">
+                  <label for="user_login_email" class="visually-hidden">Tên đăng nhập</label>
+                  <input type="text" class="form-control" id="user_login_email" name="user_login_email" [(ngModel)]="username" placeholder="tên đăng nhập" >
+                </div>
+                <div class="form-group mb-6">
+                  <label for="user_login_password" class="visually-hidden">Mật khẩu</label>
+                  <input type="password" class="form-control" id="user_login_password" [(ngModel)]="password" placeholder="mật khẩu" name="user_login_password" >
+                </div>
+                <button type="submit" class="btn btn-primary w-100 mb-7">Sign in</button>
+                <div *ngIf="message" class="alert alert-success mt-3">{{ message }}</div>
+                <div *ngIf="error" class="alert alert-danger mt-3">{{ error }}</div>
+                <div class="row no-gutters mx-n5">
+                  <div class="col-sm-6 mb-4 mb-sm-0 px-5">
+                    <a href="#" class="btn btn-outline-primary w-100 px-2 fw-500">
+                      <span class="d-inline-block me-4"><i class="fab fa-facebook-f"></i></span>Tiếp tục với Facebook</a>
+                  </div>
+                  <div class="col-sm-6 mb-4 mb-sm-0 px-5">
+                    <a href="#" class="btn btn-outline-primary w-100 px-2 fw-500">
+                      <span class="d-inline-block me-4">
+                        <i class="fab fa-google"></i>
+                      </span>Tiếp tục với Google</a>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="col-lg-6 ps-lg-6 ps-xl-12">
+              <h3 class="fs-4 mb-8">Hệ thống quản lý điểm danh</h3>
+              <p class="mb-8">Được tạo ra bởi nhóm 2 với mục đích giúp đỡ cho việc điểm danh cho học sinh và giúp các giáo viên dễ quản lý học sinh hơn trong việc học online </p>
+             
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main> 

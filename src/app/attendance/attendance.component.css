@@ -47,18 +47,19 @@ canvas {
   color: #dc3545;
 }
 
-.info-box {
-  width: 300px;
+.info {
+  width: 400px;
   background: #fff;
   border-radius: 12px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   padding: 20px;
 }
 
-.info-box h3 {
+.info h3 {
   text-align: center;
   margin-bottom: 15px;
   color: #333;
+  
 }
 .result-box {
   margin-top: 10px;
@@ -75,4 +76,16 @@ canvas {
   border: 2px solid #4caf50;
   border-radius: 6px;
   box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+}
+
+.btn-admin {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
 }

@@ -1,0 +1,82 @@
+<div class="wrapper dashboard-wrapper">
+	<div class="d-flex flex-wrap flex-xl-nowrap">
+        <app-sidebar></app-sidebar>
+<div class="page-content">
+        <app-headeradmin></app-headeradmin>
+<div class="dashboard-page-content">					
+    <div class="row mb-9 align-items-center">
+        <div class="col-xxl-9">
+            <div class="row">
+                <div class="col-sm-6 mb-8 mb-sm-0">
+                    <h2 class="fs-4 mb-0">Add New Student</h2>
+                </div>
+                <div class="col-sm-6 d-flex flex-wrap justify-content-sm-end">
+        <button  class="btn btn-primary">
+            Thêm
+        </button>
+        
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-xxl-9">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="card mb-8 rounded-4">
+                        <div class="card-header p-7 bg-transparent">
+                            <h4 class="fs-18 mb-0 font-weight-500">THÊM</h4>
+                        </div>
+                        <div class="card-body p-7">
+                            <form class="form-border-1" >
+                                <div class="mb-8">
+                                    <label for="product_title" class="mb-4 fs-13px ls-1 fw-bold text-uppercase">Mã sinh viên</label>
+                                    <input type="text" placeholder="Type here" class="form-control" id="product_title" name="name">
+                                </div>
+                                <div class="mb-8">
+                                    <label class="mb-4 fs-13px ls-1 fw-bold text-uppercase">Họ và tên</label>
+                                    <textarea placeholder="Type here" class="form-control"  name="description"></textarea>
+                                </div>
+                                <div class="col-sm-6 mb-6 px-3">
+                                    <label class="mb-4 fs-13px ls-1 fw-bold text-uppercase " for="category">Lớp</label>
+                                     <textarea placeholder="Type here" class="form-control"  name="class"></textarea>
+                                </div>
+                                
+                                <div class="mb-8">
+                                    <label class="mb-4 fs-13px ls-1 fw-bold text-uppercase" for="quantity">Email</label>
+                                    <input type="text" placeholder="Type here" class="form-control" id="quantity"  name="email">
+                                </div>
+                                <div class="mb-8">
+                                    <label class="mb-4 fs-13px ls-1 fw-bold text-uppercase" for="image">Ảnh</label>
+                                    <input type="text" placeholder=".JPG" class="form-control" id="image"  name="image">
+                                </div>
+                               
+                            </form>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+                <div class="col-lg-4">
+                    <div  class="card mb-8 rounded-4">
+                        <div class="card-header p-7 bg-transparent">
+                            <h4 class="fs-18px mb-0 font-weight-500">HÌNH ẢNH</h4>
+                        </div>
+                        <div class="card-body p-7">
+                            <div class="input-upload">
+                                <div class="mb-7">
+                                    <img [src]="" width="102" class="d-block mx-auto" alt="">
+                                </div>
+                                <input class="form-control" type="file">
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+        </div>
+    </div>
+                    </div>
+                    </div>
+                    </div>
+                </div>

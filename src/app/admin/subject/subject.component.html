@@ -1,0 +1,103 @@
+<div class="wrapper dashboard-wrapper">
+  <div class="d-flex flex-wrap flex-xl-nowrap">
+    <app-sidebar></app-sidebar>
+    <div class="page-content">
+      <app-headeradmin></app-headeradmin>
+
+      <div class="dashboard-page-content" data-animated-id="1">
+        <div class="row mb-9 align-items-center justify-content-between">
+          <div class="col-sm-6 mb-8 mb-sm-0">
+            <h2 class="fs-4 mb-0">Quản lý môn học</h2>
+          </div>
+        </div>
+
+        <div class="card mb-4 rounded-4 p-7">
+          <div class="card-body py-7 px-0">
+            <div style="padding: 12px;">
+              <div style="margin-bottom:8px; color:#c00;" *ngIf="message">{{ message }}</div>
+
+              <div class="row">
+                <div class="col-md-4">
+                  <label>Tên môn</label>
+                  <input class="form-control" [(ngModel)]="name" placeholder="Nhập tên môn" />
+                </div>
+                <div class="col-md-4">
+                  <label>Ngày trong tuần</label>
+                  <select class="form-control" [(ngModel)]="day_of_week">
+                    <option value="">-- Chọn ngày --</option>
+                    <option *ngFor="let d of dayOptions" [value]="d.value">{{ d.label }}</option>
+                  </select>
+                </div>
+                 <div class="col-md-2">
+                   <label>Bắt đầu</label>
+                   <select class="form-control" [(ngModel)]="startHour">
+                     <option [ngValue]="null">-- giờ --</option>
+                     <option *ngFor="let h of hours" [ngValue]="h">{{ h }}h</option>
+                   </select>
+                 </div>
+                 <div class="col-md-2">
+                   <label>Kết thúc</label>
+                   <select class="form-control" [(ngModel)]="endHour">
+                     <option [ngValue]="null">-- giờ --</option>
+                     <option *ngFor="let h of hours" [ngValue]="h">{{ h }}h</option>
+                   </select>
+                 </div>
+              </div>
+
+              <div style="margin-top:12px;">
+                <label>Chọn lớp áp dụng</label>
+                <div class="row">
+                  <div class="col-md-3" *ngFor="let c of classes">
+                    <label>
+                      <input type="checkbox" [checked]="selectedClassIds.includes(c.id)"
+                        (change)="toggleClassSelection(c.id, $any($event.target).checked)" />
+                      {{ c.name }}
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div style="margin-top:12px;">
+                <button class="btn btn-primary" (click)="submit()">Thêm môn học</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card mb-4 rounded-4 p-7">
+          <div class="card-body py-7 px-0">
+            <h5 class="mb-6 fs-6" style="padding: 12px;">Danh sách môn học</h5>
+            <div class="table-responsive">
+              <table class="table table-hover align-middle table-nowrap mb-0 table-borderless">
+                <thead class="table-light">
+                  <tr>
+                    <th>Tên môn</th>
+                    <th>Ngày</th>
+                    <th>Bắt đầu</th>
+                    <th>Kết thúc</th>
+                    <th>Lớp</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let s of subjects">
+                    <td>{{ s.name }}</td>
+                    <td>{{ getDayLabel(s.day_of_week) }}</td>
+                     <td>{{ formatViHour(s.time_start) }}</td>
+                     <td>{{ formatViHour(s.time_end) }}</td>
+                    <td>
+                      <span *ngFor="let clsId of s.classes; let last = last">
+                        {{ getClassNameById(clsId) }}<span *ngIf="!last">, </span>
+                      </span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

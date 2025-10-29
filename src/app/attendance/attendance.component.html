@@ -1,4 +1,12 @@
 <div class="attendance-container">
+  <div class="controls">
+    <label for="subjectSelect">Chọn môn:</label>
+    <select id="subjectSelect" [(ngModel)]="selectedSubjectId" (change)="onSubjectChange()">
+      <option [ngValue]="null">-- Chọn môn --</option>
+      <option *ngFor="let s of subjects" [ngValue]="s.id">{{ s.name }}</option>
+    </select>
+    <button (click)="startCamera()" style="margin-left:12px;">Mở camera</button>
+  </div>
   <div class="camera-box">
     <div class="video-wrapper">
       <video autoplay playsinline></video>
@@ -31,15 +39,12 @@
         <td>{{ time || '—' }}</td>
       </tr>
     </table>
-    <div *ngIf="framedImage" class ="result-box">
+    <div *ngIf="framedImage" class="result-box">
       <h4>Hình ảnh điểm danh</h4>
-      <img [src]="framedImage" alt="Framed Attendance Image" 
-      width="250" 
-      height ="150" 
-      />
+      <img [src]="framedImage" alt="Framed Attendance Image" width="250" height="150" />
     </div>
   </div>
   <div>
-    <a href ="/login" class ="btn-admin">TRANG QUẢN LÝ</a>
+    <a href="/login" class="btn-admin">TRANG QUẢN LÝ</a>
   </div>
 </div>

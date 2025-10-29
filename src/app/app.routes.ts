@@ -6,6 +6,7 @@ import { HeaderAdminComponent } from './layout/header/header.component';
 import { HomeListComponent } from './admin/home/home-admin.component';
 import { UserListComponent } from './admin/userlist/userlist.component';
 import { AddUserComponent } from './admin/add user/adduser.component';
+import { SubjectAdminComponent } from './admin/subject/subject.component';
 
 export const routes: Routes = [
   { path: '', component: AttendanceComponent },
@@ -15,4 +16,5 @@ export const routes: Routes = [
   {path: 'homelist', component: HomeListComponent},
   {path: 'userlist', component: UserListComponent},
   {path: 'adduser', component: AddUserComponent},
+  {path: 'subjects', component: SubjectAdminComponent},
 ];

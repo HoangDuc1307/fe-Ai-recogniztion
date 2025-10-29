@@ -47,5 +47,29 @@ export class AuthService {
     return this.http.delete(`${this.apiUrl}/checkins/${id}/`, { headers });
   }
   
+  getUserFaces(): Observable<any> {
+    const headers = this.getAuthHeaders();
+    return this.http.get(`${this.apiUrl}/userfaces/`, { headers });
+  }
+
+  deleteUserFace(id: number): Observable<any> {
+    const headers = this.getAuthHeaders();
+    return this.http.delete(`${this.apiUrl}/userfaces/${id}/`, { headers });
+  }
+  
+  getSubjects(): Observable<any> {
+    // GET subjects is allowed for all; keep auth header if present
+    return this.http.get(`${this.apiUrl}/subjects/`);
+  }
+
+  getClasses(): Observable<any> {
+    return this.http.get(`${this.apiUrl}/classes/`);
+  }
+
+  updateUserFace(id: number, body: any): Observable<any> {
+    const headers = this.getAuthHeaders();
+    return this.http.patch(`${this.apiUrl}/userfaces/${id}/`, body, { headers });
+  }
+  
     
 }

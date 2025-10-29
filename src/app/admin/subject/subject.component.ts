@@ -6,15 +6,25 @@ import { SidebarComponent } from '../../layout/sidebar/sidebar.component';
 import { HeaderAdminComponent } from '../../layout/header/header.component';
 import { AuthService } from '../../api/auth.service';
 
-interface ClassDto { id: number; name: string; }
-interface SubjectDto { id: number; name: string; time_start: string; time_end: string; day_of_week: string; classes: number[]; }
+interface ClassDto {
+  id: number;
+  name: string;
+}
+interface SubjectDto {
+  id: number;
+  name: string;
+  time_start: string;
+  time_end: string;
+  day_of_week: string;
+  classes: number[];
+}
 
 @Component({
   selector: 'app-subject-admin',
   standalone: true,
   imports: [CommonModule, FormsModule, SidebarComponent, HeaderAdminComponent],
   templateUrl: './subject.component.html',
-  styleUrls: ['./subject.component.css']
+  styleUrls: ['./subject.component.css'],
 })
 export class SubjectAdminComponent implements OnInit {
   apiUrl = 'http://127.0.0.1:8000/api';
@@ -30,6 +40,7 @@ export class SubjectAdminComponent implements OnInit {
     { value: 'Sunday', label: 'Chủ Nhật' },
   ];
   hours: number[] = Array.from({ length: 24 }, (_, i) => i);
+  minutes: number[] = [0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55];
 
   // form state
   name = '';
@@ -37,7 +48,9 @@ export class SubjectAdminComponent implements OnInit {
   time_start = ''; // backend format "HH:MM"
   time_end = '';
   startHour: number | null = null; // UI VN style (e.g., 13h)
+  startMinute: number | null = null;
   endHour: number | null = null;
+  endMinute: number | null = null;
   selectedClassIds: number[] = [];
 
   message = '';
@@ -57,14 +70,27 @@ export class SubjectAdminComponent implements OnInit {
   loadClasses() {
     this.http.get<ClassDto[]>(`${this.apiUrl}/classes/`).subscribe({
       next: (res) => (this.classes = res),
-      error: () => (this.message = 'Không thể tải danh sách lớp')
+      error: () => (this.message = 'Không thể tải danh sách lớp'),
     });
   }
 
   loadSubjects() {
     this.http.get<SubjectDto[]>(`${this.apiUrl}/subjects/`).subscribe({
       next: (res) => (this.subjects = res),
-      error: () => {}
+      error: () => {},
+    });
+  }
+
+  deleteSubject(id: number) {
+    if (!confirm('Xóa môn học này?')) return;
+    this.http.delete(`${this.apiUrl}/subjects/${id}/`, { headers: this.authHeaders() }).subscribe({
+      next: () => {
+        this.subjects = this.subjects.filter((s) => s.id !== id);
+        this.message = 'Đã xóa môn học';
+      },
+      error: (err) => {
+        this.message = err?.error?.detail || 'Xóa môn học thất bại (cần quyền admin)';
+      },
     });
   }
 
@@ -78,16 +104,25 @@ export class SubjectAdminComponent implements OnInit {
 
   submit() {
     // Map VN hour pickers to backend HH:MM
-    if (this.startHour != null) {
+    if (this.startHour != null && this.startMinute != null) {
       const hh = String(this.startHour).padStart(2, '0');
-      this.time_start = `${hh}:00`;
-    }
-    if (this.endHour != null) {
-      const hh = String(this.endHour).padStart(2, '0');
-      this.time_end = `${hh}:00`;
+      const mm = String(this.startMinute).padStart(2, '0');
+      this.time_start = `${hh}:${mm}`;
     }
 
-    if (!this.name || !this.day_of_week || !this.time_start || !this.time_end || this.selectedClassIds.length === 0) {
+    if (this.endHour != null && this.endMinute != null) {
+      const hh = String(this.endHour).padStart(2, '0');
+      const mm = String(this.endMinute).padStart(2, '0');
+      this.time_end = `${hh}:${mm}`;
+    }
+
+    if (
+      !this.name ||
+      !this.day_of_week ||
+      !this.time_start ||
+      !this.time_end ||
+      this.selectedClassIds.length === 0
+    ) {
       this.message = 'Vui lòng nhập đủ thông tin và chọn ít nhất một lớp';
       return;
     }
@@ -103,25 +138,29 @@ export class SubjectAdminComponent implements OnInit {
       day_of_week: this.day_of_week,
       time_start: this.time_start,
       time_end: this.time_end,
-      classes: this.selectedClassIds
+      classes: this.selectedClassIds,
     };
-    this.http.post<SubjectDto>(`${this.apiUrl}/subjects/`, body, { headers: this.authHeaders() }).subscribe({
-      next: (res) => {
-        this.message = 'Thêm môn học thành công';
-        this.subjects = [res, ...this.subjects];
-        this.resetForm();
-      },
-      error: (err) => {
-        this.message = err?.error?.detail || 'Thêm môn học thất bại (cần quyền admin)';
-      }
-    });
+    this.http
+      .post<SubjectDto>(`${this.apiUrl}/subjects/`, body, { headers: this.authHeaders() })
+      .subscribe({
+        next: (res) => {
+          this.message = 'Thêm môn học thành công';
+          this.subjects = [res, ...this.subjects];
+          this.resetForm();
+        },
+        error: (err) => {
+          this.message = err?.error?.detail || 'Thêm môn học thất bại (cần quyền admin)';
+        },
+      });
   }
 
   private resetForm() {
     this.name = '';
     this.day_of_week = '';
     this.time_start = '';
+    this.startMinute = null;
     this.time_end = '';
+    this.endMinute = null;
     this.startHour = null;
     this.endHour = null;
     this.selectedClassIds = [];
@@ -133,16 +172,14 @@ export class SubjectAdminComponent implements OnInit {
   }
 
   getDayLabel(value: string): string {
-    const d = this.dayOptions.find(o => o.value === value);
+    const d = this.dayOptions.find((o) => o.value === value);
     return d ? d.label : value;
   }
 
   formatViHour(value: string): string {
     // value like "13:00" or "13:00:00"
     if (!value) return '';
-    const hh = value.split(':')[0];
-    return `${hh}h`;
+    const [hh, mm] = value.split(':');
+    return `${hh}h${mm}p`;
   }
 }
-
-

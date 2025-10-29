@@ -38,7 +38,9 @@
                     </select>
                   </div>
                   <div class="col-md-4 col-12 mb-md-0 mb-6">
-                    <button class="btn btn-primary form-control" (click)="applyFilters()">Lọc</button>
+                    <button class="btn btn-primary form-control" (click)="applyFilters()">
+                      Lọc
+                    </button>
                   </div>
                 </div>
               </div>
@@ -51,7 +53,8 @@
                         <th class="align-middle" scope="col">Họ và tên</th>
                         <th class="align-middle" scope="col">Lớp</th>
                         <th class="align-middle" scope="col">Môn học</th>
-
+                        <th class="align-middle" scope="col">Thời gian điểm danh</th>
+                        <th class="align-middle" scope="col">Trạng Thái</th>
                         <th class="align-middle text-center" scope="col">Hình ảnh</th>
                         <th class="align-middle text-center" scope="col">Action</th>
                       </tr>
@@ -75,7 +78,17 @@
                             {{ usercheckin.subject_name || '—' }}
                           </span>
                         </td>
-
+                        <td>
+                          {{ usercheckin.check_in_time | date : 'short' }}
+                        </td>
+                        <td>
+                          <span
+                            class="badge rounded-lg rounded-pill py-3 px-4 mb-0 border-0 fs-12"
+                            [ngClass]="usercheckin.is_late ? 'alert-danger' : 'alert-success'"
+                          >
+                            {{ formatLateText(usercheckin) }}
+                          </span>
+                        </td>
                         <td>
                           <div class="text-center">
                             <img

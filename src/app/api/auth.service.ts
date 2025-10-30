@@ -31,6 +31,11 @@ export class AuthService {
     return localStorage.getItem('access_token');
   }
 
+  clearLocalStorage():void{
+    localStorage.removeItem('access_token')
+     localStorage.removeItem('refresh_token')
+  }
+
   // Tạo headers với JWT token
   private getAuthHeaders(): HttpHeaders {
     const token = this.getAccessToken();
@@ -70,6 +75,26 @@ export class AuthService {
     const headers = this.getAuthHeaders();
     return this.http.patch(`${this.apiUrl}/userfaces/${id}/`, body, { headers });
   }
-  
+
+  adduser(userData: any):Observable<any> {
+    const headers = this.getAuthHeaders();
+    return this.http.post(`${this.apiUrl}/userfaces/`, userData, { headers });
+  }
+  logout(): Observable<any> {
+    const refreshToken = localStorage.getItem('refresh_token');
+    if (refreshToken) {
+      return this.http.post(`${this.apiUrl}/logout/`, { refresh: refreshToken });
+    }
+    this.clearLocalStorage();
+    return new Observable(observer => {
+      observer.next({ message: 'Đăng xuất thành công' });
+      observer.complete();
+    });
+  }
+
+  // Làm mới access token
+  refreshToken(refresh: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/token/refresh/`, { refresh });
+  }
     
 }

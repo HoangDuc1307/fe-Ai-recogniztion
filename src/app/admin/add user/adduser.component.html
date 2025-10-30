@@ -1,82 +1,99 @@
 <div class="wrapper dashboard-wrapper">
-	<div class="d-flex flex-wrap flex-xl-nowrap">
+    <div class="d-flex flex-wrap flex-xl-nowrap">
         <app-sidebar></app-sidebar>
-<div class="page-content">
-        <app-headeradmin></app-headeradmin>
-<div class="dashboard-page-content">					
-    <div class="row mb-9 align-items-center">
-        <div class="col-xxl-9">
-            <div class="row">
-                <div class="col-sm-6 mb-8 mb-sm-0">
-                    <h2 class="fs-4 mb-0">Add New Student</h2>
-                </div>
-                <div class="col-sm-6 d-flex flex-wrap justify-content-sm-end">
-        <button  class="btn btn-primary">
-            Thêm
-        </button>
         
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="row">
-        <div class="col-xxl-9">
-            <div class="row">
-                <div class="col-lg-8">
-                    <div class="card mb-8 rounded-4">
-                        <div class="card-header p-7 bg-transparent">
-                            <h4 class="fs-18 mb-0 font-weight-500">THÊM</h4>
-                        </div>
-                        <div class="card-body p-7">
-                            <form class="form-border-1" >
-                                <div class="mb-8">
-                                    <label for="product_title" class="mb-4 fs-13px ls-1 fw-bold text-uppercase">Mã sinh viên</label>
-                                    <input type="text" placeholder="Type here" class="form-control" id="product_title" name="name">
-                                </div>
-                                <div class="mb-8">
-                                    <label class="mb-4 fs-13px ls-1 fw-bold text-uppercase">Họ và tên</label>
-                                    <textarea placeholder="Type here" class="form-control"  name="description"></textarea>
-                                </div>
-                                <div class="col-sm-6 mb-6 px-3">
-                                    <label class="mb-4 fs-13px ls-1 fw-bold text-uppercase " for="category">Lớp</label>
-                                     <textarea placeholder="Type here" class="form-control"  name="class"></textarea>
-                                </div>
-                                
-                                <div class="mb-8">
-                                    <label class="mb-4 fs-13px ls-1 fw-bold text-uppercase" for="quantity">Email</label>
-                                    <input type="text" placeholder="Type here" class="form-control" id="quantity"  name="email">
-                                </div>
-                                <div class="mb-8">
-                                    <label class="mb-4 fs-13px ls-1 fw-bold text-uppercase" for="image">Ảnh</label>
-                                    <input type="text" placeholder=".JPG" class="form-control" id="image"  name="image">
-                                </div>
-                               
-                            </form>
-                        </div>
+        <div class="page-content">
+            <app-headeradmin></app-headeradmin>
+            
+            <div class="dashboard-page-content">                
+                
+                <form> 
+
+                    <div *ngIf="message" [ngClass]="{'alert-danger': isError, 'alert-success': !isError}" class="alert alert-dismissible fade show mt-3" role="alert">
+                        {{ message }}
                     </div>
-                    
-                    
-                </div>
-                <div class="col-lg-4">
-                    <div  class="card mb-8 rounded-4">
-                        <div class="card-header p-7 bg-transparent">
-                            <h4 class="fs-18px mb-0 font-weight-500">HÌNH ẢNH</h4>
-                        </div>
-                        <div class="card-body p-7">
-                            <div class="input-upload">
-                                <div class="mb-7">
-                                    <img [src]="" width="102" class="d-block mx-auto" alt="">
+
+                    <div class="row mb-9 align-items-center">
+                        <div class="col-xxl-9">
+                            <div class="row">
+                                <div class="col-sm-6 mb-8 mb-sm-0">
+                                    <h2 class="fs-4 mb-0">Add New Student</h2>
                                 </div>
-                                <input class="form-control" type="file">
+                                <div class="col-sm-6 d-flex flex-wrap justify-content-sm-end">
+                                    
+                                    <button type="button" (click)="addUser()" [disabled]="isLoading" class="btn btn-primary">
+                                        <span *ngIf="isLoading" class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                                        {{ isLoading ? 'Đang gửi...' : 'Thêm' }}
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                    </div> 
-                </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-xxl-9">
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    <div class="card mb-8 rounded-4">
+                                        <div class="card-header p-7 bg-transparent">
+                                            <h4 class="fs-18 mb-0 font-weight-500">THÔNG TIN SINH VIÊN</h4>
+                                        </div>
+                                        <div class="card-body p-7">
+                                            
+                                            <div class="mb-8">
+                                                <label for="student_id_input" class="mb-4 fs-13px ls-1 fw-bold text-uppercase">Mã sinh viên</label>
+                                                <input type="text" placeholder="Type here" class="form-control" 
+                                                       id="student_id_input" name="student_id" 
+                                                       [(ngModel)]="user.student_id" required>
+                                            </div>
+
+                                            <div class="mb-8">
+                                                <label for="full_name_input" class="mb-4 fs-13px ls-1 fw-bold text-uppercase">Họ và tên </label>
+                                                <input type="text" placeholder="Type here" class="form-control" 
+                                                       id="full_name_input" name="full_name" 
+                                                       [(ngModel)]="user.full_name" required>
+                                            </div>
+
+                                            <div class="col-sm-6 mb-6 px-3">
+                                                <label for="className_input" class="mb-4 fs-13px ls-1 fw-bold text-uppercase ">Lớp</label>
+                                                <input type="text" placeholder="Type here" class="form-control"  
+                                                       id="className_input" name="className" 
+                                                       [(ngModel)]="user.className" required>
+                                            </div>
+                                            
+                                            <div class="mb-8">
+                                                <label for="email_input" class="mb-4 fs-13px ls-1 fw-bold text-uppercase" >Email</label>
+                                                <input type="email" placeholder="Type here" class="form-control" 
+                                                       id="email_input" name="email" 
+                                                       [(ngModel)]="user.email">
+                                            </div>
+
+                                            </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-lg-4">
+                                    <div class="card mb-8 rounded-4">
+                                        <div class="card-header p-7 bg-transparent">
+                                            <h4 class="fs-18px mb-0 font-weight-500">HÌNH ẢNH</h4>
+                                        </div>
+                                        <div class="card-body p-7">
+                                            <div class="input-upload">
+                                                <div class="mb-7">
+                                                    <img [src]="user.faceimage || 'assets/placeholder.jpg'" width="102" class="d-block mx-auto" alt="Preview Image">
+                                                </div>
+
+                                                <input class="form-control" type="file" (change)="onFileSelected($event)"> 
+                                            </div>
+                                        </div>
+                                    </div> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                
             </div>
         </div>
     </div>
-                    </div>
-                    </div>
-                    </div>
-                </div>
+</div>
